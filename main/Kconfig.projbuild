@@ -1,0 +1,36 @@
+menu "Netcraze failover"
+
+config NETCRAZE_ROUTER_IPV4
+    string "Router IPv4 address"
+    default ""
+
+config NETCRAZE_PRIMARY_INTERFACE
+    string "Primary WireGuard interface ID"
+    default ""
+
+config NETCRAZE_BACKUP_INTERFACE
+    string "Backup WireGuard interface ID"
+    default ""
+
+config NETCRAZE_PRIMARY_POLICY
+    string "Primary probe policy ID"
+    default "ProbePrimary"
+
+config NETCRAZE_BACKUP_POLICY
+    string "Backup probe policy ID"
+    default "ProbeBackup"
+
+config NETCRAZE_POSTCHECK_HOST
+    string "Managed hostname for HTTPS/NAT verification after a route move"
+    default ""
+
+config NETCRAZE_POSTCHECK_PATH
+    string "Managed HTTPS request path"
+    default "/"
+
+config NETCRAZE_POSTCHECK_STATUS
+    int "Expected managed HTTPS status"
+    range 200 399
+    default 200
+
+endmenu

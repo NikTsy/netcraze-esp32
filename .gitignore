@@ -1,0 +1,8 @@
+/build*/
+/sdkconfig
+/sdkconfig.old
+/sdkconfig.local
+/main/site_config.h
+/main/ota_bootstrap.h
+/ota.key
+__pycache__/
