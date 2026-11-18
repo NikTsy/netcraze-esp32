@@ -4,12 +4,39 @@
 
 A classic ESP32 monitors two WireGuard exits on a Netcraze router. It verifies HTTPS and router NAT per probe, moves the configured routes and DNS bindings after three consecutive measured failures, and restores the original bindings if verification fails. After USB provisioning, the ESP32 can run from a USB power adapter and accept authenticated firmware updates over the local Wi-Fi network.
 
+## How it connects
+
+```mermaid
+flowchart LR
+    Computer["Computer · ESP-IDF"]
+    Power["USB wall adapter"]
+    ESP["ESP32 development board"]
+    Router["Router · Netcraze Racer"]
+    Primary["Primary WireGuard exit"]
+    Backup["Backup WireGuard exit"]
+
+    Computer -->|"USB data · first flash"| ESP
+    Computer -.->|"Local Wi-Fi · later updates"| ESP
+    Power -->|"USB power · daily use"| ESP
+    ESP <-->|"2.4 GHz Wi-Fi · DNS, CLI and NAT checks"| Router
+    Router --> Primary
+    Router --> Backup
+```
+
+Use the USB data cable for the first flash. After provisioning, power the ESP32 from a USB adapter and connect to it over the LAN for status and updates. The ESP32 sends probes and manages bindings on the router. Client traffic goes through the router and its WireGuard tunnels.
+
+**Install with Codex or Claude Code.** Open the cloned repository and use the [guided installation prompt](INSTALL_WITH_AGENT.md#start-here).
+
 ## Hardware and scope
 
 - Classic ESP32 with at least 4 MB flash, a USB data cable for first setup, USB power and 2.4 GHz Wi-Fi.
 - Netcraze Racer with two working WireGuard connections, a local Telnet CLI, access to the router DNS resolver and the TCP NAT table. Other models and firmware builds need compatibility testing.
 - ESP-IDF 5.5.x and Python 3. See the [Espressif setup guide](https://docs.espressif.com/projects/esp-idf/en/v5.5/esp32/get-started/).
 - The firmware checks YouTube (204), ChatGPT (200) and Codex (200). Both exits must support these probes. The router uses existing WireGuard profiles supplied by the operator.
+
+### Netcraze and Keenetic
+
+Netcraze is the newer brand from the company that previously distributed Keenetic in the EAEU. The official catalogs list the [Netcraze Racer NC-4010](https://netcraze.ru/ru/netcraze-racer) and the [Keenetic Racer KN-4010](https://keenetic.com/de/keenetic-racer). The controller was exercised on Netcraze Racer. On Keenetic Racer, start in observation mode and verify the CLI output, exclusive probe policies and HTTPS/NAT checks before enabling route writes. Model and firmware version matter. [Netcraze’s compatibility guidance](https://support.netcraze.ru/giga/nc-1012/en/51147-is-it-possible-to-use-keenetic-and-netcraze-models-together-.html)
 
 ## 1. Configure the router
 
