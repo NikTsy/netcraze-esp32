@@ -4,6 +4,8 @@
 
 A classic ESP32 monitors two WireGuard exits on a Netcraze router. It verifies HTTPS and router NAT per probe, moves the configured routes and DNS bindings after three consecutive measured failures, and restores the original bindings if verification fails. After USB provisioning, the ESP32 can run from a USB power adapter and accept authenticated firmware updates over the local Wi-Fi network.
 
+**Project articles** · [English](https://telegra.ph/An-ESP32-controller-for-WireGuard-failover-on-Netcraze-Racer-11-18) · [Русский](https://telegra.ph/Kak-ESP32-pereklyuchaet-WireGuard-na-Netcraze-bez-postoyanno-vklyuchyonnogo-kompyutera-11-18)
+
 ## How it connects
 
 ```mermaid

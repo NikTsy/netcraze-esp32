@@ -4,6 +4,8 @@
 
 Обычная ESP32 следит за двумя выходами WireGuard на роутере Netcraze. Для каждой пробы она проверяет HTTPS и NAT на роутере. После трёх подряд измеренных сбоев плата может перенести заданные маршруты и DNS-привязки на резервный туннель. При ошибке проверки она возвращает исходные привязки. После настройки по USB плату можно питать от розетки и обновлять прошивку по локальному Wi-Fi.
 
+**Статьи о проекте** · [Русский](https://telegra.ph/Kak-ESP32-pereklyuchaet-WireGuard-na-Netcraze-bez-postoyanno-vklyuchyonnogo-kompyutera-11-18) · [English](https://telegra.ph/An-ESP32-controller-for-WireGuard-failover-on-Netcraze-Racer-11-18)
+
 ## Схема подключения
 
 ```mermaid
